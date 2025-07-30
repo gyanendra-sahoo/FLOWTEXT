@@ -1,0 +1,58 @@
+# Node modules
+node_modules/
+
+# Ignore specific models
+models/aiIntegration.model.js
+models/analytics.model.js
+models/comments.model.js
+models/documents.model.js
+models/documentVersion.model.js
+models/folders.model.js
+models/notifications.model.js
+models/operationLog.model.js
+models/readme.txt
+models/realTimeCollab.model.js
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# dotenv environment variables
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# OS-specific
+.DS_Store
+Thumbs.db
+
+# IDE/editor-specific
+.vscode/
+.idea/
+*.swp
+
+# Build output
+dist/
+build/
+
+# MongoDB database dumps
+dump/
+
+# Optional: coverage reports
+coverage/
+
+# Optional: pm2 process logs
+pids/
+*.pid
+*.seed
+
+# Optional: TypeScript files (if using)
+*.tsbuildinfo
+
+# Optional: debug files
+*.tgz
