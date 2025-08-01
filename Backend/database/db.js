@@ -1,8 +1,7 @@
 import mongoose from "mongoose";
 
 const connectDB = () => {
-  const DATABASE_NAME = process.env.DB_NAME;
-  const MONGODB_URI = `${process.env.MONGODB_URI}/${DATABASE_NAME}`;
+  const MONGODB_URI = `${process.env.MONGODB_URI}/${process.env.DATABASE_NAME}`;
 
   mongoose.connect(MONGODB_URI)
     .then(() => {
