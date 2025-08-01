@@ -21,20 +21,16 @@ const registerUser = asyncHandler(async (req, res) => {
   if (!email || !fullName || !password) {
     throw new ErrorHandler(400, "All fields are required");
   }
-
   const existingUser = await User.findOne({ email });
   if (existingUser) {
     throw new ErrorHandler(400, "User already exists with this email");
   }
-
   const user = await User.create({ email, fullName, password });
-
   const safeUser = {
     _id: user._id,
     email: user.email,
     fullName: user.fullName,
   };
-
   const response = new ResponseHandler(
     200,
     safeUser,
@@ -42,6 +38,7 @@ const registerUser = asyncHandler(async (req, res) => {
   );
   return res.status(response.statusCode).json(response);
 });
+
 
 const loginUser = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
@@ -74,4 +71,18 @@ const loginUser = asyncHandler(async (req, res) => {
   )
 });
 
-export { registerUser, loginUser };
+
+const logoutUser = asyncHandler(async (req, res) => {
+    const options = {
+    httpOnly: true,
+    secure: true
+  }
+  return res.status(200)
+  .clearCookie("accessToken", options)
+  .json (
+    new ResponseHandler(200, null, "User logged out successfully")
+  )
+});
+
+
+export { registerUser, loginUser, logoutUser };
