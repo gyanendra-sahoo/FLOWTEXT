@@ -22,7 +22,7 @@ const userSchema = new mongoose.Schema(
     },
     avatar: {
       type: String,
-      default: "", // URL to profile image
+      default: "", 
     },
 
     // User Preferences
@@ -82,9 +82,6 @@ const userSchema = new mongoose.Schema(
       type: Date,
       default: Date.now,
     },
-    refreshToken: {
-      type: String,
-    },
   },
   { timestamps: true }
 ); // includes createdAt and updatedAt
@@ -107,13 +104,6 @@ userSchema.methods.generateAccessToken = function () {
     process.env.ACCESS_TOKEN_SECRET,
     { expiresIn: process.env.ACCESS_TOKEN_EXPIRY }
   );
-};
-
-userSchema.methods.generateRefreshToken = function () {
-  // Generate a refresh token for the user
-  return jwt.sign({ id: this._id }, process.env.REFRESH_TOKEN_SECRET, {
-    expiresIn: process.env.REFRESH_TOKEN_EXPIRY,
-  });
 };
 
 export const User = mongoose.model("User", userSchema);

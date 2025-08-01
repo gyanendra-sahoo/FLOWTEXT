@@ -12,3 +12,5 @@ class ResponseHandler {
   }
 
 }
+
+export { ResponseHandler }
