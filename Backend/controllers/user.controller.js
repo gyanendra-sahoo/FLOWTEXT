@@ -1,17 +1,18 @@
-import { User } from '../models/users.model.js';
-import asyncHandler from '../utils/asyncHandler.js';
-import responseHandler from '../utils/responseHandler.js';
+import { User } from "../models/users.model.js";
+import asyncHandler from "../utils/asyncHandler.js";
+import { ResponseHandler } from "../utils/ResponseHandler.js";
+import { ErrorHandler } from "../utils/errorHandler.js";
 
 const registerUser = asyncHandler(async (req, res, next) => {
   const { email, fullName, password } = req.body;
 
   if (!email || !fullName || !password) {
-    return next(new Error('All fields are required'));
+    throw new ErrorHandler(400, "All fields are required");
   }
 
   const existingUser = await User.findOne({ email });
   if (existingUser) {
-    return next(new Error('User already exists'));
+    throw new ErrorHandler(400, "User already exists with this email");
   }
 
   const user = await User.create({ email, fullName, password });
@@ -22,9 +23,12 @@ const registerUser = asyncHandler(async (req, res, next) => {
     fullName: user.fullName,
   };
 
-  responseHandler(res, safeUser, 'User registered successfully', 201);
+  const response = new ResponseHandler(
+    200,
+    safeUser,
+    "User registered successfully"
+  );
+  return res.status(response.statusCode).json(response);
 });
 
-export {
-  registerUser,
-};
+export { registerUser };

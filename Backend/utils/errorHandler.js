@@ -1,10 +1,21 @@
-const errorHandler = (err, req, res, next) => {
-  const statusCode = res.statusCode && res.statusCode !== 200 ? res.statusCode : 500;
-  res.status(statusCode);
-  res.json({
-    message: err.message || 'Server Error',
-    stack: process.env.NODE_ENV === 'production' ? undefined : err.stack,
-  });
-};
+class ErrorHandler extends Error {
+  constructor(
+    statusCode,
+    message = 'Something went wrong',
+    errors = [],
+    stack = ''
+  ) {
+    super(message);
+    this.statusCode = statusCode;
+    this.errors = errors;
+    this.data = null;
+    this.success = false;
+    if(stack) {
+      this.stack = stack;
+    } else {
+      Error.captureStackTrace(this, this.constructor)
+    }
+  }
+}
 
-export default errorHandler;
+export { ErrorHandler }; 
