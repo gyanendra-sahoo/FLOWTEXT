@@ -2,16 +2,7 @@
 node_modules/
 
 # Ignore specific models
-models/aiIntegration.model.js
-models/analytics.model.js
-models/comments.model.js
-models/documents.model.js
-models/documentVersion.model.js
-models/folders.model.js
-models/notifications.model.js
-models/operationLog.model.js
 models/readme.txt
-models/realTimeCollab.model.js
 
 # Logs
 logs/
