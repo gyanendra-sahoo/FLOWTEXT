@@ -6,6 +6,7 @@ import bodyParser from 'body-parser';
 import cors from 'cors';
 import connectDB from './database/db.js';
 import userRouter from './routes/user.router.js';
+import documentRouter from './routes/document.router.js';
 import { ErrorHandler } from './utils/ErrorHandler.js';
 
 const app = express();
@@ -25,6 +26,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 // Routes
 app.use('/api/user',userRouter);
+app.use('/api/documents', documentRouter);
 
 // Database connection
 connectDB();

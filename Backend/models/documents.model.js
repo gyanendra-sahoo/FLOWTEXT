@@ -112,6 +112,10 @@ const documentSchema = new mongoose.Schema({
     suggestedImprovements: [String],
     lastAnalyzed: Date,
   },
-});
+},
+{
+timestamps: true
+}
+);
 
 export const Document = mongoose.model("Document", documentSchema);
